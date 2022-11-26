@@ -127,9 +127,32 @@ void drawRays2D()
             else{ rx+=xo; ry+=yo; dof+=1;}                                                                            //check next horizontal
         } 
         
-        SDL_SetRenderDrawColor(renderer, 0,200,0,255);
-        if(disV<disH){ rx=vx; ry=vy; disH=disV; SDL_SetRenderDrawColor(renderer, 0,150,0,255); }   //horizontal hit first
+        int pixelX;
+        int textureSize = 16;
+        int wallCol[4] = {0,200,0,255};
+
+        if(disV<disH){ // Looking at Vertical
+            rx=vx; 
+            ry=vy; 
+            disH=disV; 
+            
+            pixelX = (int)ry % 64;
+
+            wallCol[0] = 0;
+            wallCol[1] = 150;
+            wallCol[2] = 0;
+            wallCol[3] = 255;
+        }   //horizontal hit first
+        else {
+            pixelX = (int)rx % 64;
+        }
+        
+        float normalizedPixelX = (float)(pixelX) / (64);
+        SDL_SetRenderDrawColor(renderer, wallCol[0],wallCol[1] * normalizedPixelX,wallCol[2],wallCol[3]);
         SDL_RenderDrawLine(renderer, px, py, rx, ry);                                              //draw 2D ray
+        
+
+        // std::cout << "PixelX: " << normalizedPixelX  << std::endl;
             
         int ca=FixAng(pa-ra); disH=disH*cos(degToRad(ca));                                                    //fix fisheye 
         int lineH = (mapS * R_WINDOW_HEIGHT) / (disH); if(lineH > R_WINDOW_HEIGHT){ lineH = R_WINDOW_HEIGHT;} //line height and limit
@@ -186,8 +209,8 @@ void buttons(SDL_Window *window, SDL_Renderer *renderer, SDL_Event event) {
     }
 
     
-    if(A){ pa+=5; pa=FixAng(pa); pdx=cos(degToRad(pa)); pdy=-sin(degToRad(pa));} 	
-    if(D){ pa-=5; pa=FixAng(pa); pdx=cos(degToRad(pa)); pdy=-sin(degToRad(pa));} 
+    if(A){ pa+=2; pa=FixAng(pa); pdx=cos(degToRad(pa)); pdy=-sin(degToRad(pa));} 	
+    if(D){ pa-=2; pa=FixAng(pa); pdx=cos(degToRad(pa)); pdy=-sin(degToRad(pa));} 
     if(W){ px+=pdx*5; py+=pdy*5;}
     if(S){ px-=pdx*5; py-=pdy*5;}
 }
