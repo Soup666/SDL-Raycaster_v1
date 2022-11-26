@@ -14,6 +14,7 @@
 #define R_WINDOW_WIDTH 512
 #define R_WINDOW_HEIGHT 320
 #define PI   3.141592
+#define RAYCOUNT 60
 
 int map[] =
 {
@@ -86,13 +87,14 @@ void drawRays2D()
 
     SDL_SetRenderDrawColor(renderer, 0,0,255,255); 
     SDL_Rect rect2 = {WINDOW_WIDTH / 2, R_WINDOW_HEIGHT / 2, R_WINDOW_WIDTH, R_WINDOW_HEIGHT / 2};
-    SDL_RenderFillRect(renderer, &rect2);	 	
+    SDL_RenderFillRect(renderer, &rect2);
 	
     int r,mx,my,mp,dof,side; float vx,vy,rx,ry,ra,xo,yo,disV,disH; 
  
     ra=FixAng(pa+30); //ray set back 30 degrees
  
-    for(r=0;r<60;r++)
+    int rayCount = 0;
+    for(r = 0; r<60; r += 60 / RAYCOUNT)
     {
         //---Vertical--- 
         dof=0; side=0; disV=100000;
@@ -133,10 +135,11 @@ void drawRays2D()
         int lineH = (mapS * R_WINDOW_HEIGHT) / (disH); if(lineH > R_WINDOW_HEIGHT){ lineH = R_WINDOW_HEIGHT;} //line height and limit
         int lineOff = (R_WINDOW_HEIGHT / 2) - (lineH>>1);                                                     //line offset
         
-        SDL_Rect rect3 = { (WINDOW_WIDTH / 2) + r * 8, lineOff, 8, lineH};
+        SDL_Rect rect3 = { (WINDOW_WIDTH / 2) + (rayCount++ * (R_WINDOW_WIDTH / RAYCOUNT)), lineOff, (R_WINDOW_WIDTH / RAYCOUNT), lineH};
         SDL_RenderFillRect(renderer, &rect3);
 
-        ra=FixAng(ra-1); //go to next ray
+
+        ra=FixAng(ra-(60 / RAYCOUNT)); //go to next ray
     }
 }
 
