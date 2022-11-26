@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/Users/saml/UniDayz/Projects/EverythingDoom/02DoingItMyself/SDL-Raycaster_v1/build",
+  "command": "/usr/bin/clang++  -isystem /Library/Frameworks/SDL2.framework/Headers -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -F /Library/Frameworks/ -o CMakeFiles/sdlraycaster.dir/main.cpp.o -c /Users/saml/UniDayz/Projects/EverythingDoom/02DoingItMyself/SDL-Raycaster_v1/main.cpp",
+  "file": "/Users/saml/UniDayz/Projects/EverythingDoom/02DoingItMyself/SDL-Raycaster_v1/main.cpp"
+}
+]

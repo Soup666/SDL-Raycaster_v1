@@ -1,0 +1,1 @@
+/usr/bin/clang++ -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names -F /Library/Frameworks/ -framework SDL2 CMakeFiles/sdlraycaster.dir/main.cpp.o -o sdlraycaster 
