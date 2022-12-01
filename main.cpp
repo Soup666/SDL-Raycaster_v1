@@ -158,10 +158,22 @@ void drawRays2D()
         int lineH = (mapS * R_WINDOW_HEIGHT) / (disH); if(lineH > R_WINDOW_HEIGHT){ lineH = R_WINDOW_HEIGHT;} //line height and limit
         int lineOff = (R_WINDOW_HEIGHT / 2) - (lineH>>1);                                                     //line offset
         
-        SDL_Rect rect3 = { (WINDOW_WIDTH / 2) + (rayCount++ * (R_WINDOW_WIDTH / RAYCOUNT)), lineOff, (R_WINDOW_WIDTH / RAYCOUNT), lineH};
+        SDL_Rect rect3 = { (WINDOW_WIDTH / 2) + (rayCount * (R_WINDOW_WIDTH / RAYCOUNT)), lineOff, (R_WINDOW_WIDTH / RAYCOUNT), lineH};
         SDL_RenderFillRect(renderer, &rect3);
 
+        // int count = 0;
+        // int verticalSubset = 16;
+        // for (int y = 0; y < lineH; y += (lineH / (float)verticalSubset)) {
+            
+        //     SDL_SetRenderDrawColor(renderer, count ,wallCol[1] * normalizedPixelX,0,wallCol[3]);
+        //     // SDL_RenderDrawPoint(renderer, (WINDOW_WIDTH / 2) + (rayCount * (R_WINDOW_WIDTH / RAYCOUNT)), lineOff + y);
 
+        //     SDL_Rect rect3 = { (WINDOW_WIDTH / 2) + (rayCount * (R_WINDOW_WIDTH / RAYCOUNT)), lineOff + y, (R_WINDOW_WIDTH / RAYCOUNT), (lineH / (float)verticalSubset)};
+        //     SDL_RenderFillRect(renderer, &rect3);
+        //     count = ((y) / ((float)lineH)) * 100;
+        // }
+
+        rayCount++;
         ra=FixAng(ra-(60 / RAYCOUNT)); //go to next ray
     }
 }
